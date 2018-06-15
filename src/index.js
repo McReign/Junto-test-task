@@ -9,11 +9,7 @@ import './index.css';
 import App from './components/App/index';
 
 const history = createHistory();
-const store = configureStore(localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : {}, rootReducer);
-
-store.subscribe(() => {
-  localStorage['data'] = JSON.stringify(store.getState())
-});
+const store = configureStore({}, rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>

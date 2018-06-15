@@ -1,9 +1,7 @@
-
+import {} from './constants';
 
 const initialState = {
-  cards: [],
-  sortBy: 'date',
-  dates: ['', '']
+
 };
 
 function cardListReducer(state = initialState, action) {

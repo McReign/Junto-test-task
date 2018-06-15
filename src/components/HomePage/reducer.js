@@ -1,5 +1,5 @@
+import moment from 'moment';
 import {
-  ADD_CARD,
   SORT_CARDS,
   FILTER_CARDS
 } from "./constants";
@@ -7,13 +7,11 @@ import {
 const initialState = {
   cards: [],
   sortBy: 'date',
-  dates: ['', '']
+  dates: [null, null]
 };
 
 function homePageReducer(state = initialState, action) {
-  switch(action) {
-    case ADD_CARD:
-      return Object.assign({}, state, { cards: [...state.cards, action.payload]});
+  switch(action.type) {
     case SORT_CARDS:
       return Object.assign({}, state, { cards: [...state.cards], sortBy: action.payload});
     case FILTER_CARDS:

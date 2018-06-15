@@ -7,3 +7,11 @@
 .header .title {
     font-size: 24px;
 }
+
+.header .title a {
+    color: rgba(0,0,0,0.6);
+}
+
+.header .title a:focus {
+    text-decoration: none;
+}

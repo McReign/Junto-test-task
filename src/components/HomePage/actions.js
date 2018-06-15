@@ -1,15 +1,7 @@
 import {
-  ADD_CARD,
   SORT_CARDS,
   FILTER_CARDS
 } from "./constants";
-
-export const addCard = (cardData) => (
-  {
-    type: ADD_CARD,
-    payload: cardData
-  }
-);
 
 export const sortCards = (type) => (
   {
