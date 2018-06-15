@@ -5,12 +5,15 @@ import createHistory from 'history/createBrowserHistory';
 import configureStore from './store/configureStore';
 import { Router } from 'react-router-dom';
 import rootReducer from './store/rootReducer';
-import rootSaga from './store/rootSaga';
 import './index.css';
 import App from './components/App/index';
 
 const history = createHistory();
-const store = configureStore({}, rootReducer, rootSaga);
+const store = configureStore(localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : {}, rootReducer);
+
+store.subscribe(() => {
+  localStorage['data'] = JSON.stringify(store.getState())
+});
 
 ReactDOM.render(
   <Provider store={store}>

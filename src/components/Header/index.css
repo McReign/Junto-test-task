@@ -1,0 +1,9 @@
+.header {
+    height: 60px;
+    box-shadow: 0 2px 8px #f0f1f2;
+    margin-bottom: 40px;
+}
+
+.header .title {
+    font-size: 24px;
+}

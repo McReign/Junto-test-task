@@ -1,0 +1,14 @@
+.add-btn, .sort, .filter {
+    width: 100%;
+}
+
+.add-btn {
+    margin-bottom: -5px;
+}
+
+.total-amount {
+    width: 160px;
+    position: absolute;
+    top: 40px;
+    right: -36%;
+}

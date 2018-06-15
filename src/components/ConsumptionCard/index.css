@@ -1,0 +1,31 @@
+.card {
+    width: 100%;
+}
+
+.edit {
+    position: absolute;
+    top: 24px;
+    font-size: 20px;
+    right: 64px;
+    color: rgba(0,0,0, 0.4);
+    transition: 0.4s;
+}
+
+.close {
+    position: absolute;
+    top: 22px;
+    font-size: 26px;
+    right: 24px;
+    color: rgba(0,0,0, 0.4);
+    transition: 0.4s;
+}
+
+.close:hover, .edit:hover {
+    color: rgba(0,0,0, 0.8);
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.ant-card:hover {
+    cursor: default;
+}
