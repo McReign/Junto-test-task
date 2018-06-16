@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import './index.css';
 import PropTypes from "prop-types";
 import moment from 'moment';
+import uuid from 'uuid';
 import {Link} from "react-router-dom";
 import { connect } from "react-redux";
-import { Button, Row, Col, Input, DatePicker, Form } from 'antd';
+import { addCard } from "./actions";
+import { Button, Row, Col, InputNumber, Input, DatePicker, Form } from 'antd';
 
 class AddCardPage extends Component {
   constructor(props) {
@@ -15,16 +17,17 @@ class AddCardPage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.price.input.value, this.desc.textAreaRef.value, this.date.picker.input.value);
+    this.props.addCard(uuid.v4(), this.price.inputNumberRef.input.value, this.desc.textAreaRef.value, this.date.picker.input.value);
+    window.location.assign('/');
   };
 
   render() {
     return(
       <Col offset={6} span={12}>
-        <Form onSubmit={this.handleSubmit}>
+        <form>
           <Row className='form-item'>
             <Row className='label'>Сумма</Row>
-            <Row><Input addonAfter='руб.' ref={price => this.price = price}/></Row>
+            <Row><InputNumber style={{width: '100%'}} min={0} ref={price => this.price = price}/></Row>
           </Row>
           <Row className='form-item'>
             <Row className='label'>Описание</Row>
@@ -35,28 +38,18 @@ class AddCardPage extends Component {
             <Row><DatePicker defaultValue={moment()} format='DD.MM.YYYY' style={{width: '100%'}} ref={date => this.date = date}/></Row>
           </Row>
           <Row type='flex' justify='center'>
-            <Button type='primary' size='large' onClick={this.handleSubmit} style={{marginTop: 20}}>Добавить</Button>
+            <Button type='primary' size='large' htmlType='submit' onClick={this.handleSubmit} style={{marginTop: 20}}>Добавить</Button>
           </Row>
-        </Form>
+        </form>
       </Col>
     )
   }
 }
 
-AddCardPage.propTypes = {
-
-};
-
-function mapStateToProps(state) {
-  return {
-
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-
+    addCard: (id, price, desc, date) => dispatch(addCard(id, price, desc, date))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCardPage);
+export default connect(null, mapDispatchToProps)(AddCardPage);

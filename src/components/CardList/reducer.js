@@ -1,4 +1,4 @@
-import {} from './constants';
+import { DELETE_CARD } from './constants';
 
 const initialState = {
 
@@ -6,6 +6,7 @@ const initialState = {
 
 function cardListReducer(state = initialState, action) {
   switch(action) {
+
     default:
       return state;
   }

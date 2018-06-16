@@ -1,0 +1,1 @@
+export const EDIT_CARD = 'EDIT_CARD';

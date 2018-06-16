@@ -1,7 +1,16 @@
 import {
   SORT_CARDS,
-  FILTER_CARDS
+  FILTER_CARDS,
+  DELETE_CARD
 } from "./constants";
+
+
+export const deleteCard = (id) => {
+  return {
+    type: DELETE_CARD,
+    payload: id
+  }
+};
 
 export const sortCards = (type) => (
   {
@@ -16,3 +25,4 @@ export const filterCards = (datesRange) => (
     payload: datesRange
   }
 );
+

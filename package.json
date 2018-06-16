@@ -25,6 +25,7 @@
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "prop-types": "latest",
-    "moment": "latest"
+    "moment": "latest",
+    "uuid": "latest"
   }
 }

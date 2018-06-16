@@ -9,7 +9,7 @@ class CardList extends Component {
       <Row style={{margin: '40px 0'}}>
         {this.props.data && this.props.data.length ?
           this.props.data.map((item, index) =>
-            <ConsumptionCard key={item.id} {...item}/>
+            <ConsumptionCard key={item.id} {...item} onDelete={this.props.onDelete}/>
         )
         : <Row type='flex' justify='center' style={{fontSize: 18}}>Нет данных о расходах. Вы можете добавить их!</Row>
         }

@@ -1,6 +1,7 @@
 .card {
     width: 100%;
     margin-bottom: 8px;
+    transition: 0.5s;
 }
 
 .edit {

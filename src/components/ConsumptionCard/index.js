@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
 import { Card, Row, Col, Icon } from 'antd';
+import {Link} from "react-router-dom";
 
 class ConsumptionCard extends Component {
   constructor(props) {
@@ -12,30 +13,25 @@ class ConsumptionCard extends Component {
     return (
       <Card className='card' hoverable>
         <Col span={6}>
-          <p style={{fontSize: 26}}>{this.props.price} руб.</p>
-          <p style={{marginBottom: 0}}>{this.props.date}</p>
+          <p style={{fontSize: 26}}>{this.props.price ? this.props.price : '0'} руб.</p>
+          <p style={{marginBottom: 0}}>{this.props.date ? this.props.date : 'Нет даты'}</p>
         </Col>
         <Col span={17} offset={1}>
           <p style={{fontSize: 12}}>Описание</p>
-          <p style={{fontSize: 16, wordBreak: 'break-word'}}>{this.props.desc}</p>
+          <p style={{fontSize: 16, wordBreak: 'break-word'}}>{this.props.desc ? this.props.desc : 'Нет описания'}</p>
         </Col>
-        <Icon type="edit" className='edit' />
-        <Icon type="close" className='close'/>
+        <Link to={`/edit/${this.props.id}`}><Icon type="edit" className='edit'/></Link>
+        <Icon type="close" className='close' onClick={() => this.props.onDelete(this.props.id)}/>
       </Card>
     )
   }
 }
 
-ConsumptionCard.defaultProps = {
-  price: 0,
-  date: 'Нет даты',
-  desc: 'Нет описания'
-};
-
 ConsumptionCard.propTypes = {
-  price: PropTypes.number,
+  price: PropTypes.string,
   date: PropTypes.string,
-  desc: PropTypes.string
+  desc: PropTypes.string,
+  onDelete: PropTypes.func
 };
 
 export default ConsumptionCard;

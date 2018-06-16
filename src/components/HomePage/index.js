@@ -4,30 +4,22 @@ import PropTypes from "prop-types";
 import moment from 'moment';
 import {Link} from "react-router-dom";
 import { connect } from "react-redux";
-import { filterCards, sortCards } from './actions';
+import { filterCards, sortCards, deleteCard } from './actions';
 import { Button, Row, Col, Select, DatePicker } from 'antd';
 import locale from 'antd/lib/date-picker/locale/ru_RU';
+import { dateCompare, priceCompare, filterByDate } from '../../globalJs';
 import CardList from '../CardList';
 const { RangePicker } = DatePicker;
-
-const data = [
-  {
-    id: 'sfdsafsafd',
-    desc: 'saaaaaaaaaaaaaaaadqwc qecasf asdq w ds qd qw d',
-    price: 12000,
-    date: '12.01.2018'
-  },
-  {
-    id: 'sfdsaf12123afd',
-    desc: 'sasdaaaaadqwc qecasf asdq w ds qd qw d',
-    price: 800,
-    date: '12.11.2018'
-  }
-];
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.sortBy !== nextProps.sortBy) {
+      this.forceUpdate();
+    }
   }
 
   render() {
@@ -51,15 +43,20 @@ class HomePage extends Component {
           <Col span={24}>
             <Row style={{marginBottom: 2}}>Фильрация по времени</Row>
             <Row>
-              <RangePicker className='filter' value={this.props.dates} format='DD.MM.YYYY' onChange={(dates) => this.props.filterCards(dates)} locale={locale}/>
+              <RangePicker className='filter' value={[this.props.dates[0] ? moment(this.props.dates[0]) : null, this.props.dates[1] ? moment(this.props.dates[1]) : null]} ref={dates => this.dates = dates} format='DD.MM.YYYY' onChange={(dates) => this.props.filterCards(dates)} locale={locale}/>
             </Row>
           </Col>
         </Row>
         <Col className='total-amount'>
           <Row style={{marginBottom: 2}}>Общая сумма расходов</Row>
-          <Row style={{fontSize: 30}}>{data.reduce((sum, item) => sum + item.price, 0)} руб.</Row>
+          <Row style={{fontSize: 30}}>{this.props.cards.length ? filterByDate(this.props.cards).reduce((sum, item) => (+item.price) + sum, 0).toString() : '0'} руб.</Row>
         </Col>
-        <CardList data={data}/>
+        <CardList data={this.props.sortBy === 'price' ?
+          filterByDate(this.props.cards).sort(priceCompare)
+          : filterByDate(this.props.cards).sort(dateCompare)
+        }
+                  onDelete={this.props.deleteCard}
+        />
       </Col>
     )
   }
@@ -82,7 +79,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     filterCards: (dates) => dispatch(filterCards(dates)),
-    sortCards: (type) => dispatch(sortCards(type))
+    sortCards: (type) => dispatch(sortCards(type)),
+    deleteCard: (id) => dispatch(deleteCard(id))
   };
 }
 
