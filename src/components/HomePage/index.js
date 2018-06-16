@@ -24,7 +24,7 @@ class HomePage extends Component {
 
   render() {
     return(
-      <Col offset={6} span={12}>
+      <Col xs={{span: 20, offset: 2}} sm={{span: 16, offset: 4}} lg={{span: 12, offset: 6}}>
         <Row type='flex' align='bottom' justify='center' style={{marginBottom: 16}}>
           <Col span={8}>
             <Row style={{marginBottom: 2}}>Сортировка</Row>
@@ -48,13 +48,11 @@ class HomePage extends Component {
           </Col>
         </Row>
         <Col className='total-amount'>
-          <Row style={{marginBottom: 2}}>Общая сумма расходов</Row>
+          <Row style={{marginBottom: 2, whiteSpace: 'nowrap'}}>Общая сумма расходов</Row>
           <Row style={{fontSize: 30}}>{this.props.cards.length ? filterByDate(this.props.cards).reduce((sum, item) => (+item.price) + sum, 0).toString() : '0'} руб.</Row>
         </Col>
-        <CardList data={this.props.sortBy === 'price' ?
-          filterByDate(this.props.cards).sort(priceCompare)
-          : filterByDate(this.props.cards).sort(dateCompare)
-        }
+        <CardList data={this.props.sortBy === 'price' ? filterByDate(this.props.cards).sort(priceCompare)
+          : filterByDate(this.props.cards).sort(dateCompare)}
                   onDelete={this.props.deleteCard}
         />
       </Col>

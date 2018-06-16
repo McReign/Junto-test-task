@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import './index.css';
 import PropTypes from "prop-types";
 import moment from 'moment';
-import {Link} from "react-router-dom";
 import { editCard } from "./actions";
 import { connect } from "react-redux";
-import { Button, Row, Col, InputNumber, Input, DatePicker, Form } from 'antd';
+import { Button, Row, Col, InputNumber, Input, DatePicker } from 'antd';
 
 class EditCardPage extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class EditCardPage extends Component {
 
   render() {
     return(
-      <Col offset={6} span={12}>
+      <Col xs={{span: 20, offset: 2}} md={{span: 12, offset: 6}} sm={{span: 16, offset: 4}} lg={{span: 10, offset: 7}}>
         <form>
           <Row className='form-item'>
             <Row className='label'>Сумма</Row>
@@ -54,6 +53,13 @@ class EditCardPage extends Component {
     )
   }
 }
+
+EditCardPage.propTypes = {
+  cards: PropTypes.array,
+  price: PropTypes.string,
+  desc: PropTypes.string,
+  date: PropTypes.string
+};
 
 function mapStateToProps(state) {
   return {

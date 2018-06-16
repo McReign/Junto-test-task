@@ -7,8 +7,17 @@
 }
 
 .total-amount {
-    width: 160px;
+    width: 30%;
     position: absolute;
     top: 40px;
-    right: -36%;
+    right: -40%;
+}
+
+@media all and (max-width: 992px){
+    .total-amount {
+        position: static;
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+    }
 }

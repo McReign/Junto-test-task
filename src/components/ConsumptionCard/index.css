@@ -4,6 +4,11 @@
     transition: 0.5s;
 }
 
+.desc p:last-child{
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
 .edit {
     position: absolute;
     top: 24px;
@@ -30,4 +35,14 @@
 
 .ant-card:hover {
     cursor: default;
+}
+
+@media all and (max-width: 768px){
+    .desc {
+        margin-top: 20px;
+    }
+
+    .price p:first-child{
+        margin-bottom: 6px;
+    }
 }
